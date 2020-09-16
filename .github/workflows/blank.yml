@@ -25,7 +25,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
       
-      - name: Terraform apply
+      - name: Install Terraform
+        uses: little-core-labs/install-terraform@v1
+
+      - name: Terraform
         run: |
           terraform init ./prepare/terraform
           terraform plan -var-file="inputs/terraform.tfvars" ./prepare/terraform
@@ -47,5 +50,3 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
 
-      - name: Install Terraform
-        uses: little-core-labs/install-terraform@v1
