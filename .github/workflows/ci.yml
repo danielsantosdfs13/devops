@@ -72,8 +72,8 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: | 
-            417294130961.dkr.ecr.us-east-1.amazonaws.com/backend-foo:latest
-            417294130961.dkr.ecr.us-east-1.amazonaws.com/backend-foo:${{ steps.vars.outputs.sha_short }}
+            ${{ secrets.BACKEND_REPO_NAME }}:latest
+            ${{ secrets.BACKEND_REPO_NAME }}:${{ steps.vars.outputs.sha_short }}
 
       - name: Build and push - Frontend
         uses: docker/build-push-action@v2
@@ -83,8 +83,8 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            417294130961.dkr.ecr.us-east-1.amazonaws.com/frontend-foo:latest
-            417294130961.dkr.ecr.us-east-1.amazonaws.com/frontend-foo:${{ steps.vars.outputs.sha_short }}
+            ${{ secrets.FRONTEND_REPO_NAME }}:latest
+            ${{ secrets.FRONTEND_REPO_NAME }}:${{ steps.vars.outputs.sha_short }}
 
   # terraform destroy -var-file="inputs/terraform.tfvars" --auto-approve ./pipelines/prepare/terraform          
   # This workflow contains a single job called "build"
@@ -107,7 +107,7 @@ jobs:
           aws-region: us-east-1        
 
       - name: Update kubeconfig
-        run: aws eks --region us-east-1 update-kubeconfig --name squad01-prd-cluster
+        run: aws eks --region us-east-1 update-kubeconfig --name ${{ secrets.EKS_CLUSTER_NAME }}
 
       - name: Update kubeconfig
         run: kubectl get pods
