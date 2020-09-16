@@ -31,7 +31,7 @@ jobs:
       - name: Terraform
         run: |
           terraform init ./pipelines/prepare/terraform
-          terraform plan -var-file="inputs/terraform.tfvars" ./pipelines/prepare/terraform
+          terraform plan -var-file="pipelines/inputs/terraform.tfvars" ./pipelines/prepare/terraform
 
   # This workflow contains a single job called "build"
   build:
