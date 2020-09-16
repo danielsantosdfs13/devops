@@ -109,5 +109,8 @@ jobs:
       - name: Update kubeconfig
         run: aws eks --region us-east-1 update-kubeconfig --name ${{ secrets.EKS_CLUSTER_NAME }}
 
-      - name: Update kubeconfig
+      - name: Lista all pods
         run: kubectl get pods
+
+      - name: Remove kubeconfig
+        run: rm -rf /home/runner/.kube/config        
