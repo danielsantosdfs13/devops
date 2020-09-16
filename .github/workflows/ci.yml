@@ -33,25 +33,6 @@ jobs:
           terraform init ./pipelines/prepare/terraform
           terraform plan -var-file="inputs/terraform.tfvars" ./pipelines/prepare/terraform
           terraform apply -var-file="inputs/terraform.tfvars" --auto-approve ./pipelines/prepare/terraform
-  # terraform destroy -var-file="inputs/terraform.tfvars" --auto-approve ./pipelines/prepare/terraform          
-  # This workflow contains a single job called "build"
-  build:
-    needs: [prepare]
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
-
 
   bake:
     needs: [build]
@@ -104,3 +85,22 @@ jobs:
           tags: |
             417294130961.dkr.ecr.us-east-1.amazonaws.com/frontend-foo:latest
             417294130961.dkr.ecr.us-east-1.amazonaws.com/frontend-foo:${{ steps.vars.outputs.sha_short }}
+
+  # terraform destroy -var-file="inputs/terraform.tfvars" --auto-approve ./pipelines/prepare/terraform          
+  # This workflow contains a single job called "build"
+  deploy:
+    needs: [bake]
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+
+      - eks/update-kubeconfig-with-authenticator:
+          label: cluster
+          aws-region: us-east-1
+          cluster-name: squad01-prd-cluster
+          aws-profile: aws-profile
+          kubeconfig-file-path: ./kubeconfig
+          dry-run: false
+          verbose: false
