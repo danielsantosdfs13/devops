@@ -1,61 +1,76 @@
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: {{ include "devops.fullname" . }}
+  name: {{ .Values.name }}
+  namespace: {{ .Values.namespace }}
   labels:
-    {{- include "devops.labels" . | nindent 4 }}
+   app: {{ .Values.name }}
+   chart: {{ template "devops.chart" . }}
 spec:
-{{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
-{{- end }}
+  revisionHistoryLimit: 3
+  minReadySeconds: {{ .Values.minReadySeconds }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
   selector:
     matchLabels:
-      {{- include "devops.selectorLabels" . | nindent 6 }}
+      app: {{ .Values.name }}
+      group: {{ .Values.group }}
   template:
     metadata:
-    {{- with .Values.podAnnotations }}
-      annotations:
-        {{- toYaml . | nindent 8 }}
-    {{- end }}
       labels:
-        {{- include "devops.selectorLabels" . | nindent 8 }}
+        app: {{ .Values.name }}
+        chart: {{ template "devops.chart" . }}
+
     spec:
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      serviceAccountName: {{ include "devops.serviceAccountName" . }}
-      securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        - name: {{ .Values.name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: http
-              containerPort: 80
-              protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
+            - containerPort: 8080
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            limits:
+              cpu: {{ .Values.resources.limits.cpu | default "300m" | quote }}
+              memory: {{ .Values.resources.limits.memory | default "0.1Gi" | quote }}
+            requests:
+              cpu: {{ .Values.resources.requests.cpu | default "150m" | quote }}
+              memory: {{ .Values.resources.requests.memory | default "0.1Gi" | quote }}
+          env:
+          {{- range .Values.env }}
+            - name: {{ .name }}
+              value: {{ .value | quote }}
+          {{- end}}
+          volumeMounts:
+            - mountPath: /etc/localtime
+              name: localtime-volume
+            - mountPath: /etc/sysconfig/clock
+              name: sysclock-volume
+      volumes: {}
+      {{- if .Values.antiAffinity.enabled }}
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - {{ .Values.name }}
+            topologyKey: "kubernetes.io/hostname"
+      {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
-        {{- toYaml . | nindent 8 }}
+{{ toYaml . | indent 8 }}
       {{- end }}
       {{- with .Values.affinity }}
       affinity:
-        {{- toYaml . | nindent 8 }}
+{{ toYaml . | indent 8 }}
       {{- end }}
-      {{- with .Values.tolerations }}
+    {{- with .Values.tolerations }}
       tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+{{ toYaml . | indent 8 }}
+    {{- end }}

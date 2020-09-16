@@ -32,6 +32,7 @@ jobs:
           terraform plan -var-file="inputs/terraform.tfvars" ./pipelines/prepare/terraform
           terraform apply -var-file="inputs/terraform.tfvars" --auto-approve ./pipelines/prepare/terraform
 
+
   build:
     needs: [prepare]
     runs-on: ubuntu-latest
@@ -107,8 +108,31 @@ jobs:
       - name: Update kubeconfig
         run: aws eks --region us-east-1 update-kubeconfig --name ${{ secrets.EKS_CLUSTER_NAME }}
 
+      - name: Helm - Deploy Ingress Controller
+        run: |
+          helm repo add nginx-stable https://helm.nginx.com/stable
+          helm repo update
+          helm upgrade devops nginx-stable/nginx-ingress --install
+
+      - name: Cria namespace hml
+        run: kubectl create ns hml
+                  
+      - name: Helm - Deploy frontend-foo
+        run: |
+          helm template frontend-foo pipelines/deploy/helm/devops -f application/backend-foo/kubernetes/values.yaml --set image.repository=${{ secrets.FRONTEND_REPO_NAME }},image.tag=${{ build.steps.vars.outputs.sha_short }}
+          helm upgrade frontend-foo pipelines/deploy/helm/devops --set image.repository=${{ secrets.FRONT_REPO_NAME }},image.tag=${{ build.steps.vars.outputs.sha_short }} --install
+
+      - name: Helm - Deploy backend-foo
+        run: |
+          helm template backend-foo pipelines/deploy/helm/devops -f application/backend-foo/kubernetes/values.yaml --set image.repository=${{ secrets.BACKEND_REPO_NAME }},image.tag=${{ build.steps.vars.outputs.sha_short }}
+          helm upgrade backend-foo pipelines/deploy/helm/devops -f application/backend-foo/kubernetes/values.yaml --set image.repository=${{ secrets.BACKEND_REPO_NAME }},image.tag=${{ build.steps.vars.outputs.sha_short }} --install
+
+      - name: Print loadbalancer endpoint
+        run: |
+          kubectl get svc devops-nginx-ingress | awk 'NR>1 {print $4}'
+
       - name: Lista all pods
-        run: kubectl get pods
+        run: kubectl get pods -n hml
 
       - name: Remove kubeconfig
-        run: rm -rf /home/runner/.kube/config        
+        run: rm -rf /home/runner/.kube/config

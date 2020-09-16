@@ -1,11 +1,11 @@
-name: "backend-foo"
+name: "frontend-foo"
 replicaCount: 1
 
 env:
   - name: ENV_VARIABLE
     value: "VALUE"
 
-namespace: hml
+namespace: prd
 
 resources:
   limits:
@@ -22,7 +22,7 @@ ingress:
   #   nginx.ingress.kubernetes.io/rewrite-target: /jcot
   routes: 
     - paths:
-        - path: /hml/api
+        - path: /prd
 
 hpa:
   enabled: true
