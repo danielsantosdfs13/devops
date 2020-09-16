@@ -32,7 +32,7 @@ jobs:
         run: |
           terraform init ./pipelines/prepare/terraform
           terraform plan -var-file="inputs/terraform.tfvars" ./pipelines/prepare/terraform
-          terraform apply -var-file="inputs/terraform.tfvars" ./pipelines/prepare/terraform --auto-approve
+          terraform apply -var-file="inputs/terraform.tfvars" --auto-approve ./pipelines/prepare/terraform
 
   # This workflow contains a single job called "build"
   build:
