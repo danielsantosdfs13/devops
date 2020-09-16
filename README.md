@@ -39,10 +39,6 @@ Este projeto contem os arquivos que simulam uma pipeline CI/CD com intuíto de r
 
 Responsável por realizar uma avaliacão do estado desejado pelo usuário e o que existe atualmente de infraestrutura, criando e alterando o que for necessário.
 
-## Stage: Build
-
-Responsável por realizar o build das aplicacões (backend e frontend) afim de validar que a aplicacão está ao menos compilando
-
 ## Stage: Bake
 
 Responsável por coletar os artefados gerado no estágio "Build" e construir a imagem docker para cada aplicacão
