@@ -107,7 +107,7 @@ jobs:
           aws-region: us-east-1        
 
       - name: Update kubeconfig
-        run: aws eks --region us-east-1 update-kubeconfig --name squad01-eks-prd
+        run: aws eks --region us-east-1 update-kubeconfig --name squad01-prd-cluster
 
       - name: Update kubeconfig
         run: kubectl get pods
