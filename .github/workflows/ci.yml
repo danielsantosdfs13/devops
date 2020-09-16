@@ -34,7 +34,7 @@ jobs:
           terraform plan -var-file="inputs/terraform.tfvars" ./pipelines/prepare/terraform
           terraform apply -var-file="inputs/terraform.tfvars" --auto-approve ./pipelines/prepare/terraform
 
-  bake:
+  build:
     needs: [prepare]
     runs-on: ubuntu-latest
     steps:
@@ -89,14 +89,14 @@ jobs:
   # terraform destroy -var-file="inputs/terraform.tfvars" --auto-approve ./pipelines/prepare/terraform          
   # This workflow contains a single job called "build"
   deploy:
-    needs: [bake]
+    needs: [build]
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     steps:
 
       - uses: azure/setup-kubectl@v1
-        with:
-          version: '<version>' # default is latest stable
+        # with:
+          # version: '<version>' # default is latest stable
         id: install      
 
       - name: Configure AWS Credentials
