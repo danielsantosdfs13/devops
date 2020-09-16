@@ -31,3 +31,11 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+
+    - name: Install Terraform
+      uses: little-core-labs/install-terraform@v1
+
+    - name: Terraform apply
+      run: |
+        terraform init ./prepare/terraform
+        terraform plan -var-file="inputs/terraform.tfvars" ./prepare/terraform
