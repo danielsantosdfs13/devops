@@ -1,3 +1,16 @@
+## Será avaliado:
+
+- Organização
+- Qualidade da documentacão
+- Uso de ferramentas de automatização
+- Elegância na solução proposta
+- Simplicidade e eficiência
+- Técnicas e boas práticas de segurança
+
+# Documentacão
+
+Este projeto contem os arquivos que simulam uma pipeline CI/CD com intuíto de realizar provisionamento de um cluster Kubernetes (AWS EKS) utilizando terraform, provisionamento de duas aplicacões demo (backend e frontend).
+
 ## Requisitos:
 
 - Ambiente Cloud (AWS)
@@ -8,32 +21,14 @@
 - Automatização do processo de build da Aplicação Web e implantação de todos os recursos no serviço cloud utilizado
 - Documentação detalhada e instruções para execução em ambiente real (produção e desenvolvimento).
 
-## Tecnologias sugeridas:
-
-Pode-se fazer uso das seguintes tecnologias:
-*   Docker
-*   Terraform
-*   Ansible
-*   Kubernetes
-
-OBS: outras ferramentas/soluções também são bem vindas, desde que funcione de forma simples e eficiente.
-
-## Será avaliado:
-
-- Organização
-- Qualidade da documentacão
-- Uso de ferramentas de automatização
-- Elegância na solução proposta
-- Simplicidade e eficiência
-- Técnicas e boas práticas de segurança
-
-## Entrega:
-
-O código deverá ser entregue em um repositório git hospedado na núvem (ex: GitHub).
-
-# Documentacão
-
-Este projeto contem os arquivos que simulam uma pipeline CI/CD com intuíto de realizar provisionamento de um cluster Kubernetes (AWS EKS) utilizando terraform, provisionamento de duas aplicacões demo (backend e frontend).
+| Nome                 | Origem  | Opcional ? | Descrição                                                                                      |
+| :-------------------  | :-----: | :--------: | --------------------------------------------------------------------------------------------- |
+| EKS_CLUSTER_NAME      |  inputs/terraform.tfvars  |    NÃO     | Nome do cluster EKS a ser criado.                                           |
+| REGION                |  inputs/terraform.tfvars  |    NÃO     | Região AWS a ser utilizada.                                                 |
+| AWS_ACCESS_KEY_ID     |  Projeto (Secrets)        |    NÃO     | ID da chave de acesso para realizar acões na AWS                            |
+| AWS_SECRET_ACCESS_KEY |  Projeto (Secrets)        |    NÃO     | Segredo da chave de acesso para realizar acões na AWS                       |
+| BACKEND_REPO_NAME     |  Projeto (Secrets)        |    NÃO     | Nome do repositorio ECR a ser utilizado pela aplicaão backend-foo           |
+| FRONTEND_REPO_NAME    |  Projeto (Secrets)        |    NÃO     | Nome do repositorio ECR a ser utilizado pela aplicaão frontend-foo          |
 
 ## Stage: Prepare
 
