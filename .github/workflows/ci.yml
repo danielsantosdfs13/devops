@@ -58,13 +58,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # - name: Prepare
-      #   id: prep
-      #   run: |
-
-      #     echo ::set-output name=version::${VERSION}
-      #     echo ::set-output name=tags::${TAGS}
-      #     echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')      
+      - name: Get commit sha_short
+        id: vars
+        shell: bash
+        run: |
+          echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -90,7 +89,9 @@ jobs:
           file: ./application/backend-foo/dockerfile
           platforms: linux/amd64
           push: true
-          tags: 417294130961.dkr.ecr.us-east-1.amazonaws.com/backend-foo:latest
+          tags: | 
+            417294130961.dkr.ecr.us-east-1.amazonaws.com/backend-foo:latest
+            417294130961.dkr.ecr.us-east-1.amazonaws.com/backend-foo:${{ steps.vars.outputs.sha_short }}"
 
       - name: Build and push - Frontend
         uses: docker/build-push-action@v2
@@ -99,4 +100,6 @@ jobs:
           file: ./application/frontend-foo/dockerfile
           platforms: linux/amd64
           push: true
-          tags: 417294130961.dkr.ecr.us-east-1.amazonaws.com/frontend-foo:latest
+          tags: |
+            417294130961.dkr.ecr.us-east-1.amazonaws.com/frontend-foo:latest
+            417294130961.dkr.ecr.us-east-1.amazonaws.com/frontend-foo:${{ steps.vars.outputs.sha_short }}"
