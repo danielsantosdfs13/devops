@@ -80,15 +80,15 @@ jobs:
         with:
           context: .
           file: ./application/backend-foo/dockerfile
-          platforms: linux/amd64,linux/arm64,linux/386
+          platforms: linux/amd64
           push: true
-          tags: 417294130961.dkr.ecr.us-east-1.amazonaws.com/backend-foo:${{ github.sha }}
+          tags: 417294130961.dkr.ecr.us-east-1.amazonaws.com/backend-foo:latest
 
       - name: Build and push - Frontend
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ./application/frontend-foo/dockerfile
-          platforms: linux/amd64,linux/arm64,linux/386
+          platforms: linux/amd64
           push: true
-          tags: 417294130961.dkr.ecr.us-east-1.amazonaws.com/frontend-foo:${{ github.sha }}
+          tags: 417294130961.dkr.ecr.us-east-1.amazonaws.com/frontend-foo:latest
