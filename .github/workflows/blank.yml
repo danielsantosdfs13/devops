@@ -77,7 +77,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: /application/backend-foo
+          file: /application/backend-foo/
           platforms: linux/amd64,linux/arm64,linux/386
           push: true
           tags: 417294130961.dkr.ecr.us-east-1.amazonaws.com/backend-foo:${{ github.sha }}
@@ -86,7 +86,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: /application/frontend-foo
+          file: /application/frontend-foo/
           platforms: linux/amd64,linux/arm64,linux/386
           push: true
           tags: 417294130961.dkr.ecr.us-east-1.amazonaws.com/frontend-foo:${{ github.sha }}
