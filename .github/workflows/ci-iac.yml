@@ -13,6 +13,12 @@ jobs:
   prepare:
     runs-on: ubuntu-latest
     steps:
+
+      - name: Configure Terraform Vars
+        env: # Or as an environment variable
+          TF_VAR_eks_cluster_name: ${{ secrets.EKS_CLUSTER_NAME }}
+          TF_VAR_region: ${{ secrets.AWS_REGION }}
+
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
@@ -30,5 +36,5 @@ jobs:
       - name: Terraform
         run: |
           terraform init ./terraform
-          terraform plan -var-file="inputs/terraform.tfvars" ./terraform
-          terraform apply -var-file="inputs/terraform.tfvars" --auto-approve ./terraform
+          terraform plan ./terraform
+# terraform apply --auto-approve ./terraform
