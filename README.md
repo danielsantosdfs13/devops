@@ -16,8 +16,20 @@ Como a entrega deste desafio solicitou apenas um repositorio no github, realizei
 
 ## Requisitos obrigatórios
 
-Para funcionamento correto dessa stack, são necessários a criação / definição dos recursos na AWS (EC2 KeyPair)
+Para funcionamento correto dessa stack, são necessários a criação / definição do recurso na AWS (EC2 KeyPair), após a execução da pipeline das branches:
 
+-   FRONTEND-FOO-DEV
+-   FRONTEND-FOO
+-   BACKEND-FOO-DEV
+-   BACKEND-FOO
+
+Será retornado o endereço de DNS que você irá precisar configurar em sua zona de DNS.
+
+```
+Print loadbalancer endpoint
+Run kubectl get svc devops-ingress-ingress-nginx-controller | awk 'NR>1 {print $4}'
+abf2af26f0f784567b0643074d2613d4-1804244159.us-east-1.elb.amazonaws.com
+```
 # Descrição branch BACKEND-FOO e FRONTEND-FOO-DEV
 
 Codigo fonte da aplicação backend-foo. Para qualquer push realizado na branch FRONTEND-FOO-DEV será realizado CI/CD e entregue para o ambiente de HML, já para os push realizados na branch FRONTEND-FOO simulando a branch master de qualquer repositório, será entregue para o ambiente PRD.
