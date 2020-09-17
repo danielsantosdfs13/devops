@@ -16,14 +16,14 @@ Como a entrega deste desafio solicitou apenas um repositorio no github, realizei
 
 ## Requisitos obrigatórios
 
-- Para funcionamento correto dessa stack, são necessários a criação / definição do recurso na AWS (EC2 KeyPair). 
+Para funcionamento correto dessa stack, são necessários a criação / definição do recurso na AWS (EC2 KeyPair). 
 
-- Após a execução da pipeline das branches:
+Após a execução da pipeline das branches:
 
-  -   FRONTEND-FOO-DEV
-  -   FRONTEND-FOO
-  -   BACKEND-FOO-DEV
-  -   BACKEND-FOO
+-   FRONTEND-FOO-DEV
+-   FRONTEND-FOO
+-   BACKEND-FOO-DEV
+-   BACKEND-FOO
 
 Será retornado o endereço de DNS que você irá precisar configurar em sua zona de DNS.
 
