@@ -6,7 +6,9 @@ name: CI-BACKEND
 # events but only for the master branch
 on:
   push:
-    branches: [ backend-foo ]
+    branches: 
+      - backend-foo
+      - backend-foo-dev
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -41,6 +43,7 @@ jobs:
         uses: docker/setup-buildx-action@v1
 
       - name: Build and push - backend
+        if: github.ref == 'refs/heads/backend-foo'
         uses: docker/build-push-action@v2
         with:
           context: ./src
@@ -51,6 +54,16 @@ jobs:
             ${{ secrets.backend_REPO_NAME }}:latest
             ${{ secrets.backend_REPO_NAME }}:${{ steps.vars.outputs.sha_short }}
 
+      - name: Build and push - backend (hml)
+        if: github.ref == 'refs/heads/backend-foo-dev'
+        uses: docker/build-push-action@v2
+        with:
+          context: ./src
+          file: ./src/dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ${{ secrets.backend_REPO_NAME }}:latest
   deploy:
     needs: [build]
     # The type of runner that the job will run on
@@ -90,17 +103,29 @@ jobs:
       - name: Cria namespace
         run: kubectl apply -f utils/deploy/kubectl/ns.yaml
                   
-      - name: Helm - Deploy backend-foo
+      - name: Helm - Deploy backend-foo (hml)
+        if: github.ref == 'refs/heads/backend-foo-dev'
         run: |
-          helm template backend-foo utils/deploy/helm/devops -f src/kubernetes/values.yaml --set image.repository=${{ secrets.backend_REPO_NAME }},image.tag=${{ steps.vars.outputs.sha_short }}
-          helm upgrade backend-foo utils/deploy/helm/devops -f src/kubernetes/values.yaml --set image.repository=${{ secrets.backend_REPO_NAME }},image.tag=${{ steps.vars.outputs.sha_short }} --install
+          helm template backend-foo utils/deploy/helm/devops -f src/kubernetes/values.yaml --set image.repository=${{ secrets.backend_REPO_NAME }},image.tag=latest
+          helm upgrade backend-foo utils/deploy/helm/devops -f src/kubernetes/values.yaml --set image.repository=${{ secrets.backend_REPO_NAME }},image.tag=latest --install
+
+      - name: Helm - Deploy backend-foo (prd)
+        if: github.ref == 'refs/heads/backend-foo'
+        run: |
+          helm template backend-foo utils/deploy/helm/devops -f src/kubernetes/prd-values.yaml --set image.repository=${{ secrets.backend_REPO_NAME }},image.tag=${{ steps.vars.outputs.sha_short }}
+          helm upgrade backend-foo utils/deploy/helm/devops -f src/kubernetes/prd-values.yaml --set image.repository=${{ secrets.backend_REPO_NAME }},image.tag=${{ steps.vars.outputs.sha_short }} --install
 
       - name: Print loadbalancer endpoint
         run: |
           kubectl get svc devops-nginx-ingress | awk 'NR>1 {print $4}'
 
-      - name: Lista all pods
+      - name: Lista all pods (hml)
+        if: github.ref == 'refs/heads/backend-foo-dev'
         run: kubectl get pods -n hml
+      
+      - name: Lista all pods (prd)
+        if: github.ref == 'refs/heads/backend-foo'
+        run: kubectl get pods -n prd
 
       - name: Remove kubeconfig
         run: rm -rf /home/runner/.kube/config
