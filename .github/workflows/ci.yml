@@ -72,7 +72,7 @@ jobs:
           push: true
           tags: | 
             ${{ secrets.BACKEND_REPO_NAME }}:latest
-            ${{ secrets.BACKEND_REPO_NAME }}:$GITHUB_SHA
+            ${{ secrets.BACKEND_REPO_NAME }}:$(echo $GITHUB_SHA | head -c7)
 
       - name: Build and push - Frontend
         uses: docker/build-push-action@v2
@@ -83,7 +83,7 @@ jobs:
           push: true
           tags: |
             ${{ secrets.FRONTEND_REPO_NAME }}:latest
-            ${{ secrets.FRONTEND_REPO_NAME }}:$GITHUB_SHA
+            ${{ secrets.FRONTEND_REPO_NAME }}:$(echo $GITHUB_SHA | head -c7)
 
   # terraform destroy -var-file="inputs/terraform.tfvars" --auto-approve ./pipelines/prepare/terraform          
   # This workflow contains a single job called "build"
@@ -128,12 +128,12 @@ jobs:
                   
       - name: Helm - Deploy frontend-foo
         run: |
-          helm template frontend-foo pipelines/deploy/helm/devops -f application/backend-foo/kubernetes/values.yaml --set image.repository=${{ secrets.FRONTEND_REPO_NAME }},image.tag=$GITHUB_SHA
-          helm upgrade frontend-foo pipelines/deploy/helm/devops -f application/backend-foo/kubernetes/values.yaml --set image.repository=${{ secrets.FRONT_REPO_NAME }},image.tag=$GITHUB_SHA --install
+          helm template frontend-foo pipelines/deploy/helm/devops -f application/backend-foo/kubernetes/values.yaml --set image.repository=${{ secrets.FRONTEND_REPO_NAME }},image.tag=$(echo $GITHUB_SHA | head -c7)
+          helm upgrade frontend-foo pipelines/deploy/helm/devops -f application/backend-foo/kubernetes/values.yaml --set image.repository=${{ secrets.FRONT_REPO_NAME }},image.tag=$(echo $GITHUB_SHA | head -c7) --install
 
       - name: Helm - Deploy backend-foo
         run: |
-          helm template backend-foo pipelines/deploy/helm/devops -f application/backend-foo/kubernetes/values.yaml --set image.repository=${{ secrets.BACKEND_REPO_NAME }},image.tag=$GITHUB_SHA
+          helm template backend-foo pipelines/deploy/helm/devops -f application/backend-foo/kubernetes/values.yaml --set image.repository=${{ secrets.BACKEND_REPO_NAME }},image.tag=$(echo $GITHUB_SHA | head -c7)
           helm upgrade backend-foo pipelines/deploy/helm/devops -f application/backend-foo/kubernetes/values.yaml --set image.repository=${{ secrets.BACKEND_REPO_NAME }},image.tag=$GITHUB_SHA --install
 
       - name: Print loadbalancer endpoint

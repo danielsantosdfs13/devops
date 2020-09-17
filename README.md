@@ -1,25 +1,8 @@
-## Será avaliado:
-
-- Organização
-- Qualidade da documentacão
-- Uso de ferramentas de automatização
-- Elegância na solução proposta
-- Simplicidade e eficiência
-- Técnicas e boas práticas de segurança
-
-# Documentacão
+# Descrição
 
 Este projeto contem os arquivos que simulam uma pipeline CI/CD com intuíto de realizar provisionamento de um cluster Kubernetes (AWS EKS) utilizando terraform, provisionamento de duas aplicacões demo (backend e frontend).
 
-## Requisitos:
-
-- Ambiente Cloud (AWS)
-- Infraestrutura básica de rede (firewall, subnets, etc)
-- Load Balancer
-- Aplicação Web: pode ser qualquer tipo de aplicação que demonstre a utilização de Docker e conteúdo estático
-- Resolução de DNS para o Load Balancer
-- Automatização do processo de build da Aplicação Web e implantação de todos os recursos no serviço cloud utilizado
-- Documentação detalhada e instruções para execução em ambiente real (produção e desenvolvimento).
+## Variáveis
 
 | Nome                 | Origem  | Opcional ? | Descrição                                                                                      |
 | :-------------------  | :-----: | :--------: | --------------------------------------------------------------------------------------------- |
@@ -27,17 +10,38 @@ Este projeto contem os arquivos que simulam uma pipeline CI/CD com intuíto de r
 | REGION                |  inputs/terraform.tfvars  |    NÃO     | Região AWS a ser utilizada.                                                 |
 | AWS_ACCESS_KEY_ID     |  Projeto (Secrets)        |    NÃO     | ID da chave de acesso para realizar acões na AWS                            |
 | AWS_SECRET_ACCESS_KEY |  Projeto (Secrets)        |    NÃO     | Segredo da chave de acesso para realizar acões na AWS                       |
-| BACKEND_REPO_NAME     |  Projeto (Secrets)        |    NÃO     | Nome do repositorio ECR a ser utilizado pela aplicaão backend-foo           |
-| FRONTEND_REPO_NAME    |  Projeto (Secrets)        |    NÃO     | Nome do repositorio ECR a ser utilizado pela aplicaão frontend-foo          |
+| BACKEND_REPO_NAME     |  Projeto (Secrets)        |    NÃO     | Nome do repositorio ECR a ser utilizado pela aplicação backend-foo           |
+| FRONTEND_REPO_NAME    |  Projeto (Secrets)        |    NÃO     | Nome do repositorio ECR a ser utilizado pela aplicação frontend-foo          |
 
-## Stage: Prepare
+## Pipeline de CI
 
-Responsável por realizar uma avaliacão do estado desejado pelo usuário e o que existe atualmente de infraestrutura, criando e alterando o que for necessário.
+### Stage: Prepare
 
-## Stage: Bake
+Responsável por realizar uma avaliação do estado desejado pelo usuário e o que existe atualmente de infraestrutura, criando e alterando o que for necessário.
 
-Responsável por coletar os artefados gerado no estágio "Build" e construir a imagem docker para cada aplicacão
+### Stage: Build
 
-## Stage: Deploy
+Responsável realizar a imagem docker para as aplicações (backend-foo e frontend-foo) e inserir no repositorio ECR criado pelo estágio `Prepare`
 
-Responsável por implantar dentro do Kubernetes cada aplicacão atendendo seus requisitos
+### Stage: Deploy
+
+Responsável por implantar dentro do Kubernetes: 
+
+-   Ingress Controller
+-   Aplicação frontend-foo e backend-foo
+
+## Descrição das aplicações
+
+### frontend-foo
+
+
+| Item                  | Valor                                                 | Descrição ? |
+| :-------------------  | :-----:                                               | :--------:  |
+| Diretorio             |  application/frontend-foo                             |    Código fonte da aplicação      |
+| Engine                |  Node.js                                              |    N/A      |
+| Porta                 |  8080                                                 |    Porta tcp configurada na aplicação      |
+| Path (PRD)            |  http://`<LoadBalancer>`/prd/                         |    NÃO      |
+| Path (HML)            |  http://`<LoadBalancer>`/hml/                         |    NÃO      |
+| Helm values (PRD)     |  application/frontend-foo/kubernetes/prd-values.yaml  |    NÃO      |
+| Helm values (HML*)    |  application/frontend-foo/kubernetes/values.yaml      |    NÃO      |
+| Dockerfile            |  application/frontend-foo/kubernetes/values.yaml      |    NÃO      |
