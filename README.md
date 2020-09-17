@@ -24,15 +24,15 @@ Codigo fonte da aplicação frontend-foo. Para qualquer push realizado na branch
 
 ## Variáveis obrigatórias
 
-| Nome                  | Origem  | Opcional ? | Descrição                                                                                     |
-| :-------------------  | :-----: | :--------: | --------------------------------------------------------------------------------------------- |
-| AWS_ACCESS_KEY_ID     |  Projeto (Secrets)   |    NÃO     | ID da chave de acesso para realizar acões na AWS                                 |
-| AWS_SECRET_ACCESS_KEY |  Projeto (Secrets)   |    NÃO     | Segredo da chave de acesso para realizar acões na AWS                            |
-| BACKEND_REPO_NAME     |  Projeto (Secrets)   |    NÃO     | Nome do repositorio ECR a ser utilizado pela aplicação backend-foo               |
-| FRONTEND_REPO_NAME    |  Projeto (Secrets)   |    NÃO     | Nome do repositorio ECR a ser utilizado pela aplicação frontend-foo              |
-| URL_BASE_FRONTEND_HML |  Projeto (Secrets)   |    NÃO     | Url base para ambiente não produtivo                                             |
-| URL_BASE_FRONTEND_PRD |  Projeto (Secrets)   |    NÃO     | Url base para ambiente produtivo                                                 |
-| ROUTE_53_ZONE_ID      |  Projeto (Secrets)   |    NÃO     | ID da zona de dns a ser utilizada pela stack                                     |
+| Nome                    | Origem  | Opcional ? | Descrição                                                                                     |
+| :-------------------    | :-----: | :--------: | --------------------------------------------------------------------------------------------- |
+| AWS_ACCESS_KEY_ID       |  Projeto (Secrets)   |    NÃO     | ID da chave de acesso para realizar acões na AWS                                 |
+| AWS_SECRET_ACCESS_KEY   |  Projeto (Secrets)   |    NÃO     | Segredo da chave de acesso para realizar acões na AWS                            |
+| BACKEND_REPO_NAME       |  Projeto (Secrets)   |    NÃO     | Nome do repositorio ECR a ser utilizado pela aplicação backend-foo               |
+| FRONTEND_REPO_NAME      |  Projeto (Secrets)   |    NÃO     | Nome do repositorio ECR a ser utilizado pela aplicação backend-foo               |
+| URL_BASE_FRONTEND_HML   |  Projeto (Secrets)   |    NÃO     | Url base para ambiente não produtivo                                             |
+| URL_BASE_FRONTEND_PRD   |  Projeto (Secrets)   |    NÃO     | Url base para ambiente produtivo                                                 |
+| EC2_KEY_PAIR_EKS_WORKER |  Projeto (Secrets)   |    NÃO     | Nome da key pair a ser utilizada para acesso remoto aos workers do eks           |
 
 ## Pipeline de CI
 

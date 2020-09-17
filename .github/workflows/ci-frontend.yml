@@ -117,7 +117,7 @@ jobs:
 
       - name: Print loadbalancer endpoint
         run: |
-          kubectl get svc devops-nginx-ingress | awk 'NR>1 {print $4}'
+          kubectl get svc devops-ingress-ingress-nginx-controller | awk 'NR>1 {print $4}'
 
       - name: Lista all pods (hml)
         if: github.ref == 'refs/heads/frontend-foo-dev'
