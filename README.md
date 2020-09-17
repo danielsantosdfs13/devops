@@ -6,11 +6,13 @@ Como a entrega deste desafio solicitou apenas um repositorio no github, realizei
 
 ## Branches
 
-| Nome                  |  Descrição                                                                                      | Workflow        |
-| :-------------------  |  ---------------------------------------------------------------------------------------------  | --------        |
-| IAC                   |  Responsável pela criação dos recursos como (VPC, EKS, ECR...) utilizando terraform             | ci-iac.yml      |
-| FRONTEND-FOO          |  Responsável por armazenar o codigo fonte da aplicação frontend-foo e realizar o CI/CD da mesma | ci-frontend.yml |
-| BACKEND-FOO           |  Responsável por armazenar o codigo fonte da aplicação backend-foo e realizar o CI/CD da mesma  | ci-backend.yml |
+| Nome                  |  Descrição                                                                                                                        | Workflow        |
+| :-------------------  |  ---------------------------------------------------------------------------------------------                                    | --------        |
+| IAC                   |  Responsável pela criação dos recursos como (VPC, EKS, ECR...) utilizando terraform                                               | ci-iac.yml      |
+| FRONTEND-FOO          |  Responsável por armazenar o codigo fonte da aplicação frontend-foo e realizar o CI/CD da mesma                                   | ci-frontend.yml |
+| FRONTEND-FOO-DEV      |  Simular uma branch qualquer do repositório frontend-foo, caso a estrutura desse desafio fosse separada em mais de um repositório | ci-frontend.yml |
+| BACKEND-FOO           |  Responsável por armazenar o codigo fonte da aplicação backend-foo e realizar o CI/CD da mesma                                    | ci-backend.yml  |
+| BACKEND-FOO-DEV       |  Simular uma branch qualquer do repositório backend-foo, caso a estrutura desse desafio fosse separada em mais de um repositório  | ci-backend.yml  |
 
 ## Requisitos obrigatórios
 
