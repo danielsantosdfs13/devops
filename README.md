@@ -15,33 +15,13 @@ Realizar criacão dos recursos base de infraestrutura para funcionamento da stac
 
 ## Pipeline de CI-IAC
 
-### Stage: Prepare
-
 Responsável por realizar uma avaliação do estado desejado pelo usuário e o que existe atualmente de infraestrutura, criando e alterando o que for necessário.
 
-### Stage: Build
+Será criado os seguintes componentes:
 
-Responsável realizar a imagem docker para as aplicações (backend-foo e frontend-foo) e inserir no repositorio ECR criado pelo estágio `Prepare`
-
-### Stage: Deploy
-
-Responsável por implantar dentro do Kubernetes: 
-
--   Ingress Controller
--   Aplicação frontend-foo e backend-foo
-
-## Descrição das aplicações
-
-### frontend-foo
-
-
-| Item                  | Valor                                                 | Descrição ? |
-| :-------------------  | :-----:                                               | :--------:  |
-| Diretorio             |  application/frontend-foo                             |    Código fonte da aplicação      |
-| Engine                |  Node.js                                              |    N/A      |
-| Porta                 |  8080                                                 |    Porta tcp configurada na aplicação      |
-| Path (PRD)            |  http://`<LoadBalancer>`/prd/                         |    NÃO      |
-| Path (HML)            |  http://`<LoadBalancer>`/hml/                         |    NÃO      |
-| Helm values (PRD)     |  application/frontend-foo/kubernetes/prd-values.yaml  |    NÃO      |
-| Helm values (HML*)    |  application/frontend-foo/kubernetes/values.yaml      |    NÃO      |
-| Dockerfile            |  application/frontend-foo/kubernetes/values.yaml      |    NÃO      |
+-   vpc
+-   security group
+-   nat gateway
+-   iam roles
+-   eks
+-   eks managed node
