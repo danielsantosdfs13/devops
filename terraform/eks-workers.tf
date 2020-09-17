@@ -14,7 +14,7 @@ resource "aws_eks_node_group" "eks_cluster_worker_apps" {
   }
 
   remote_access {
-    ec2_ssh_key               = "eks_cluster_worker_apps"
+    ec2_ssh_key               = var.ec2_key_pair_eks_worker
     source_security_group_ids = [aws_security_group.worker_group_mgmt_apps.id]
   }  
 
