@@ -7,7 +7,7 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.get('/api', function(req, res, next) {
+app.get('/', function(req, res, next) {
     res.render('index', { title: 'Hello World! - DevOps' });
 });
 
