@@ -1,4 +1,4 @@
-name: "frontend-foo"
+name: "frontend-foo-prd"
 replicaCount: 1
 
 env:
