@@ -13,7 +13,7 @@ Realizar criacão dos recursos base de infraestrutura para funcionamento da stac
 | BACKEND_REPO_NAME     |  Projeto (Secrets)        |    NÃO     | Nome do repositorio ECR a ser utilizado pela aplicação backend-foo           |
 | FRONTEND_REPO_NAME    |  Projeto (Secrets)        |    NÃO     | Nome do repositorio ECR a ser utilizado pela aplicação frontend-foo          |
 
-## Pipeline de CI-IAC
+## Pipeline CI-IAC
 
 Responsável por realizar uma avaliação do estado desejado pelo usuário e o que existe atualmente de infraestrutura, criando e alterando o que for necessário.
 
