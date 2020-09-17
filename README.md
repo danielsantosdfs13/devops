@@ -16,7 +16,20 @@ Como a entrega deste desafio solicitou apenas um repositorio no github, realizei
 
 ## Requisitos obrigatórios
 
-Para funcionamento correto dessa stack, são necessários a criação / definição dos recursos na AWS (Route 53, EC2 KeyPair)
+Para funcionamento correto dessa stack, são necessários a criação / definição do recurso na AWS (EC2 KeyPair), após a execução da pipeline das branches:
+
+-   FRONTEND-FOO-DEV
+-   FRONTEND-FOO
+-   BACKEND-FOO-DEV
+-   BACKEND-FOO
+
+Será retornado o endereço de DNS que você irá precisar configurar em sua zona de DNS.
+
+```
+Print loadbalancer endpoint
+Run kubectl get svc devops-ingress-ingress-nginx-controller | awk 'NR>1 {print $4}'
+abf2af26f0f784567b0643074d2613d4-1804244159.us-east-1.elb.amazonaws.com
+```
 
 # Descrição branch FRONTEND-FOO e FRONTEND-FOO-DEV
 
