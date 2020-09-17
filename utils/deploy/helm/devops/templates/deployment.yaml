@@ -7,7 +7,6 @@ metadata:
    app: {{ .Values.name }}
    chart: {{ template "devops.chart" . }}
 spec:
-  replicas: {{ .Values.replicaCount }}
   revisionHistoryLimit: 3
   minReadySeconds: {{ .Values.minReadySeconds }}
   strategy:
