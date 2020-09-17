@@ -31,6 +31,26 @@ Run kubectl get svc devops-ingress-ingress-nginx-controller | awk 'NR>1 {print $
 abf2af26f0f784567b0643074d2613d4-1804244159.us-east-1.elb.amazonaws.com
 ```
 
+# Kubernetes
+
+Essa versão cria apenas um cluster Kubernetes utilizando o serviço gerenciado da Amazon AWS o EKS contendo apenas o que é necessário para validar funcionamento da solução. 
+
+Componentes instalados / Configurados:
+
+- Nginx Ingress Controller
+- Horizontal pod autoscaler
+
+Componentes importantes não instalados:
+
+- Cert manager (Podendo ser integrado com Let`s Encrypt para fornecer certificado SSL válido)
+- Cluster Autoscaler (Responsável por redimensionar o cluster de acordo com a demanda)
+- Service Account integration com OIDC / Kiam (Responsável por fornecer uma identidade unica ao POD para acesso aos recursos da AWS)
+- Fluxcd (GitOps, possibilitando sincronismo de manifestos yaml diretamente no cluster)
+- Grafana (Prover metricas, graficos, dashboards para o cluster)
+- Prometheus (Fornecer metricas do cluster) 
+- Dashboard (Console administrativa para o cluster)
+- Calico (Controle de ACL a nível de POD para garantir melhor segurança dentro do cluster)
+
 # Evidências
 
 ## Geral
