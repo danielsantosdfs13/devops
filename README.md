@@ -11,11 +11,11 @@ Print loadbalancer endpoint
 Run kubectl get svc devops-ingress-ingress-nginx-controller | awk 'NR>1 {print $4}'
 abf2af26f0f784567b0643074d2613d4-1804244159.us-east-1.elb.amazonaws.com
 ```
-# Descrição branch BACKEND-FOO e FRONTEND-FOO-DEV
+# Descrição branch BACKEND-FOO e BACKEND-FOO-DEV
 
-Codigo fonte da aplicação backend-foo. Para qualquer push realizado na branch FRONTEND-FOO-DEV será realizado CI/CD e entregue para o ambiente de HML.
+Codigo fonte da aplicação backend-foo. Para qualquer push realizado na branch BACKEND-FOO-DEV será realizado CI/CD e entregue para o ambiente de HML.
 
-Já para os push realizados na branch FRONTEND-FOO simulando a branch master de qualquer repositório, será entregue para o ambiente PRD.
+Já para os push realizados na branch BACKEND-FOO simulando a branch master de qualquer repositório, será entregue para o ambiente PRD.
 
 ## Variáveis obrigatórias
 
@@ -40,8 +40,8 @@ Etapas:
 | :-------------------  | :-----:                                               | :--------:  |
 | Engine                |  Node.js                                              |    N/A      |
 | Porta                 |  8080                                                 |    Porta tcp configurada na aplicação      |
-| Path (PRD)            |  http://**`<URL_BASE_FRONTEND_PRD>`**/api                 |    NÃO      |
-| Path (HML)            |  http://**`<URL_BASE_FRONTEND_HML>`**/api/                |    NÃO      |
+| Path (PRD)            |  http://**`<URL_BASE>`**/api                          |    NÃO      |
+| Path (HML)            |  http://**`<URL_BASE`**/api/                          |    NÃO      |
 | Helm values (PRD)     |  src/kubernetes/prd-values.yaml                       |    NÃO      |
 | Helm values (HML)     |  src/kubernetes/values.yaml                           |    NÃO      |
 | Dockerfile            |  src/dockerfile                                       |    NÃO      |
