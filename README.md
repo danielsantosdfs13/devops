@@ -1,48 +1,17 @@
-## Requisitos:
+# Descrição
 
-- Ambiente Cloud (AWS)
-- Infraestrutura básica de rede (firewall, subnets, etc)
-- Load Balancer
-- Aplicação Web: pode ser qualquer tipo de aplicação que demonstre a utilização de Docker e conteúdo estático
-- Resolução de DNS para o Load Balancer
-- Automatização do processo de build da Aplicação Web e implantação de todos os recursos no serviço cloud utilizado
-- Documentação detalhada e instruções para execução em ambiente real (produção e desenvolvimento).
+Objetivo: Criar um ambiente utilizando o menor nível de ação interativa/manual possível.
 
-## Tecnologias sugeridas:
+Como a entrega deste desafio solicitou apenas um repositorio no github, realizei a separação dos codigos em branch separadas:
 
-Pode-se fazer uso das seguintes tecnologias:
-*   Docker
-*   Terraform
-*   Ansible
-*   Kubernetes
+## Branches
 
-OBS: outras ferramentas/soluções também são bem vindas, desde que funcione de forma simples e eficiente.
+| Nome                  |  Descrição                                                                                      | Workflow        |
+| :-------------------  |  ---------------------------------------------------------------------------------------------  | --------        |
+| IAC                   |  Responsável pela criação dos recursos como (VPC, EKS, ECR...) utilizando terraform             | ci-iac.yml      |
+| FRONTEND-FOO          |  Responsável por armazenar o codigo fonte da aplicação frontend-foo e realizar o CI/CD da mesma | ci-frontend.yml |
+| BACKEND-FOO           |  Responsável por armazenar o codigo fonte da aplicação backend-foo e realizar o CI/CD da mesma  | ci-backend.yml |
 
-## Será avaliado:
+## Requisitos obrigatórios
 
-- Organização
-- Qualidade da documentacão
-- Uso de ferramentas de automatização
-- Elegância na solução proposta
-- Simplicidade e eficiência
-- Técnicas e boas práticas de segurança
-
-## Entrega:
-
-O código deverá ser entregue em um repositório git hospedado na núvem (ex: GitHub).
-
-# Documentacão
-
-Este projeto contem os arquivos que simulam uma pipeline CI/CD com intuíto de realizar provisionamento de um cluster Kubernetes (AWS EKS) utilizando terraform, provisionamento de duas aplicacões demo (backend e frontend).
-
-## Stage: Prepare
-
-Responsável por realizar uma avaliacão do estado desejado pelo usuário e o que existe atualmente de infraestrutura, criando e alterando o que for necessário.
-
-## Stage: Bake
-
-Responsável por coletar os artefados gerado no estágio "Build" e construir a imagem docker para cada aplicacão
-
-## Stage: Deploy
-
-Responsável por implantar dentro do Kubernetes cada aplicacão atendendo seus requisitos
+Para funcionamento correto dessa stack, são necessários a criação / definição dos recursos na AWS (Route 53, EC2 KeyPair)
