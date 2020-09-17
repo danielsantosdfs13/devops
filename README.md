@@ -4,12 +4,12 @@ Este projeto contem os arquivos que simulam uma pipeline CI/CD com intuíto de r
 
 ## Variáveis
 
-| Nome                 | Origem  | Opcional ? | Descrição                                                                                      |
+| Nome                  | Origem  | Opcional ? | Descrição                                                                                     |
 | :-------------------  | :-----: | :--------: | --------------------------------------------------------------------------------------------- |
-| AWS_ACCESS_KEY_ID     |  Projeto (Secrets)        |    NÃO     | ID da chave de acesso para realizar acões na AWS                            |
-| AWS_SECRET_ACCESS_KEY |  Projeto (Secrets)        |    NÃO     | Segredo da chave de acesso para realizar acões na AWS                       |
-| BACKEND_REPO_NAME     |  Projeto (Secrets)        |    NÃO     | Nome do repositorio ECR a ser utilizado pela aplicação backend-foo           |
-| backend_REPO_NAME    |  Projeto (Secrets)        |    NÃO     | Nome do repositorio ECR a ser utilizado pela aplicação backend-foo          |
+| AWS_ACCESS_KEY_ID     |  Projeto (Secrets)   |    NÃO     | ID da chave de acesso para realizar acões na AWS                                 |
+| AWS_SECRET_ACCESS_KEY |  Projeto (Secrets)   |    NÃO     | Segredo da chave de acesso para realizar acões na AWS                            |
+| BACKEND_REPO_NAME     |  Projeto (Secrets)   |    NÃO     | Nome do repositorio ECR a ser utilizado pela aplicação backend-foo               |
+| FRONTEND_REPO_NAME    |  Projeto (Secrets)   |    NÃO     | Nome do repositorio ECR a ser utilizado pela aplicação backend-foo               |
 
 ## Pipeline de CI
 
