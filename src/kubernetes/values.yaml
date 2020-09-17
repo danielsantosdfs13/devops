@@ -24,6 +24,6 @@ ingress:
 
 hpa:
   enabled: true
-  minReplicas: 1
-  maxReplicas: 1
-  targetCPU: 50
+  minReplicas: 2
+  maxReplicas: 4
+  targetCPU: 80
