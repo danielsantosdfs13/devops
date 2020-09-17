@@ -1,7 +1,7 @@
 devops
 =========
 
-Devops é o chart responsável por criar os recursos para sistema demo, com api e frontend.
+Devops é o chart responsável por criar os recursos para sistema demo, com api e backend.
 
 ```
 variables:

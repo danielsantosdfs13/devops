@@ -1,4 +1,4 @@
-name: "frontend-foo"
+name: "backend-foo"
 replicaCount: 1
 
 env:
