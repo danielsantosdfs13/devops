@@ -16,4 +16,15 @@ Como a entrega deste desafio solicitou apenas um repositorio no github, realizei
 
 ## Requisitos obrigatórios
 
-Para funcionamento correto dessa stack, são necessários a criação / definição dos recursos na AWS (Route 53, EC2 KeyPair)
+Para funcionamento correto dessa stack, são necessários a criação / definição dos recursos na AWS (Route 53, EC2 KeyPair), após a execucão da pipeline das branches:
+
+-   FRONTEND-FOO-DEV
+-   FRONTEND-FOO
+-   BACKEND-FOO-DEV
+-   BACKEND-FOO
+
+Será retornado o endereco de DNS que você irá precisar configurar em sua zona de DNS.
+
+```
+
+```
