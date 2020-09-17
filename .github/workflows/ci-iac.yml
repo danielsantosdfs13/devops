@@ -28,6 +28,6 @@ jobs:
 
       - name: Terraform
         run: |
-          terraform init ./pipelines/prepare/terraform
+          terraform init ./terraform
           terraform plan -var-file="inputs/terraform.tfvars" ./terraform
           terraform apply -var-file="inputs/terraform.tfvars" --auto-approve ./terraform
