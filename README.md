@@ -1,6 +1,6 @@
 # Descrição
 
-Este projeto contem os arquivos que simulam uma pipeline CI/CD com intuíto de realizar provisionamento de um cluster Kubernetes (AWS EKS) utilizando terraform, provisionamento de duas aplicacões demo (backend e frontend).
+Realizar criacão dos recursos base de infraestrutura para funcionamento da stack foo.
 
 ## Variáveis
 
@@ -13,7 +13,7 @@ Este projeto contem os arquivos que simulam uma pipeline CI/CD com intuíto de r
 | BACKEND_REPO_NAME     |  Projeto (Secrets)        |    NÃO     | Nome do repositorio ECR a ser utilizado pela aplicação backend-foo           |
 | FRONTEND_REPO_NAME    |  Projeto (Secrets)        |    NÃO     | Nome do repositorio ECR a ser utilizado pela aplicação frontend-foo          |
 
-## Pipeline de CI
+## Pipeline de CI-IAC
 
 ### Stage: Prepare
 
