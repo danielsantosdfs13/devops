@@ -47,11 +47,10 @@ Etapas:
 
 | Item                  | Valor                                                 | Descrição ? |
 | :-------------------  | :-----:                                               | :--------:  |
-| Diretorio             |  application/backend-foo                              |    Código fonte da aplicação      |
 | Engine                |  Node.js                                              |    N/A      |
 | Porta                 |  8080                                                 |    Porta tcp configurada na aplicação      |
-| Path (PRD)            |  http://`<LoadBalancer>`/prd/                         |    NÃO      |
-| Path (HML)            |  http://`<LoadBalancer>`/hml/                         |    NÃO      |
+| Path (PRD)            |  http://`<URL_BASE_FRONTEND_PRD>`/api                 |    NÃO      |
+| Path (HML)            |  http://`<URL_BASE_FRONTEND_HML>`/api/                |    NÃO      |
 | Helm values (PRD)     |  application/backend-foo/kubernetes/prd-values.yaml   |    NÃO      |
-| Helm values (HML*)    |  application/backend-foo/kubernetes/values.yaml       |    NÃO      |
+| Helm values (HML)     |  application/backend-foo/kubernetes/values.yaml       |    NÃO      |
 | Dockerfile            |  application/backend-foo/kubernetes/values.yaml       |    NÃO      |
