@@ -15,10 +15,9 @@ jobs:
     steps:
 
       - name: Configure Terraform Vars
-        env: # Or as an environment variable
-          TF_VAR_eks_cluster_name: ${{ secrets.EKS_CLUSTER_NAME }}
-          TF_VAR_region: ${{ secrets.AWS_REGION }}
-        run: echo "Configurando variaveis de ambiente"
+        run: | 
+          echo "::set-env name=TF_VAR_eks_cluster_name::${{ secrets.EKS_CLUSTER_NAME }}"
+          echo "::set-env name=TF_VAR_region::${{ secrets.AWS_REGION }}"
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
