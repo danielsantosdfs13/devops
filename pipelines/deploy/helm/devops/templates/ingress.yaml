@@ -10,11 +10,12 @@ metadata:
 
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    kubernetes.io/ingress.class: nginx
 spec:
   rules:
-     
+    - host: {{ .Values.ingress.host }}
     {{- range .Values.ingress.routes }}
-    - http:
+      http:
         paths:
         {{- range .paths }}
           - path: {{ .path }}

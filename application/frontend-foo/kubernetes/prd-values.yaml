@@ -20,9 +20,10 @@ ingress:
   # annotations: 
   #   nginx.ingress.kubernetes.io/enable-cors: "true"
   #   nginx.ingress.kubernetes.io/rewrite-target: /jcot
+  host: amoremfigurinhasbh.com.br
   routes: 
     - paths:
-        - path: /prd
+        - path: /
 
 hpa:
   enabled: true
