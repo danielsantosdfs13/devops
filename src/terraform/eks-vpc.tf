@@ -4,14 +4,14 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "2.6.0"
 
-  name                 = "vpc-eks"
-  cidr                 = "10.0.0.0/16"
+  name                 = var.vpc_name
+  cidr                 = var.vpc_cidr
   azs                  = data.aws_availability_zones.available.names
-  private_subnets      = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
-  public_subnets       = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
-  enable_nat_gateway   = true
-  single_nat_gateway   = true
-  enable_dns_hostnames = true
+  private_subnets      = var.vpc_private_subnets
+  public_subnets       = var.vpc_public_subnets
+  enable_nat_gateway   = var.vpc_enable_nat_gateway
+  single_nat_gateway   = var.vpc_single_nat_gateway
+  enable_dns_hostnames = var.vpc_enable_dns_hostnames
 
   tags = {
     "kubernetes.io/cluster/${var.eks_cluster_name}" = "shared"

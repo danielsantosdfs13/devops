@@ -7,6 +7,7 @@ resource "aws_eks_node_group" "eks_cluster_worker_apps" {
     "group" = "apps"
   }
   instance_types = ["t3.medium"]
+  
   scaling_config {
     desired_size = 1
     max_size     = 1

@@ -14,15 +14,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+      # Configurar variáveis para utilizar no terraform mapeando os valores recebidos pelo secrets do projeto no GitHub
       - name: Configure Terraform Vars
         run: | 
           echo "::set-env name=TF_VAR_eks_cluster_name::${{ secrets.EKS_CLUSTER_NAME }}"
           echo "::set-env name=TF_VAR_ec2_key_pair_eks_worker::${{ secrets.EC2_KEY_PAIR_EKS_WORKER }}"
           echo "::set-env name=TF_VAR_region::${{ secrets.AWS_REGION }}"
 
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      # Realizar checkout do repo
       - uses: actions/checkout@v2
 
+      # Configurar acesso aos recursos da AWS
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -30,12 +32,14 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
       
+      # Instalar terraform no runner
       - uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 0.13.2
-
+      
+      # Realizar implantação dos recursos utilizando terraform
       - name: Terraform
         run: |
-          terraform init ./terraform
-          terraform plan ./terraform
-          terraform apply --auto-approve ./terraform
+          terraform init ./src/terraform
+          terraform plan ./src/terraform
+          terraform apply --auto-approve ./src/terraform
