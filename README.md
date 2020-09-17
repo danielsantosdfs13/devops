@@ -6,8 +6,6 @@ Este projeto contem os arquivos que simulam uma pipeline CI/CD com intuíto de r
 
 | Nome                 | Origem  | Opcional ? | Descrição                                                                                      |
 | :-------------------  | :-----: | :--------: | --------------------------------------------------------------------------------------------- |
-| EKS_CLUSTER_NAME      |  inputs/terraform.tfvars  |    NÃO     | Nome do cluster EKS a ser criado.                                           |
-| REGION                |  inputs/terraform.tfvars  |    NÃO     | Região AWS a ser utilizada.                                                 |
 | AWS_ACCESS_KEY_ID     |  Projeto (Secrets)        |    NÃO     | ID da chave de acesso para realizar acões na AWS                            |
 | AWS_SECRET_ACCESS_KEY |  Projeto (Secrets)        |    NÃO     | Segredo da chave de acesso para realizar acões na AWS                       |
 | BACKEND_REPO_NAME     |  Projeto (Secrets)        |    NÃO     | Nome do repositorio ECR a ser utilizado pela aplicação backend-foo           |
