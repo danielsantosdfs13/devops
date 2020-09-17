@@ -28,7 +28,7 @@ Codigo fonte da aplicação frontend-foo. Para qualquer push realizado na branch
 | :-------------------  | :-----: | :--------: | --------------------------------------------------------------------------------------------- |
 | AWS_ACCESS_KEY_ID     |  Projeto (Secrets)   |    NÃO     | ID da chave de acesso para realizar acões na AWS                                 |
 | AWS_SECRET_ACCESS_KEY |  Projeto (Secrets)   |    NÃO     | Segredo da chave de acesso para realizar acões na AWS                            |
-| frontend_REPO_NAME    |  Projeto (Secrets)   |    NÃO     | Nome do repositorio ECR a ser utilizado pela aplicação frontend-foo              |
+| BACKEND_REPO_NAME     |  Projeto (Secrets)   |    NÃO     | Nome do repositorio ECR a ser utilizado pela aplicação backend-foo               |
 | FRONTEND_REPO_NAME    |  Projeto (Secrets)   |    NÃO     | Nome do repositorio ECR a ser utilizado pela aplicação frontend-foo              |
 | URL_BASE_FRONTEND_HML |  Projeto (Secrets)   |    NÃO     | Url base para ambiente não produtivo                                             |
 | URL_BASE_FRONTEND_PRD |  Projeto (Secrets)   |    NÃO     | Url base para ambiente produtivo                                                 |
