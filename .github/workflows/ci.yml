@@ -124,7 +124,7 @@ jobs:
           helm upgrade devops nginx-stable/nginx-ingress --install
 
       - name: Cria namespace hml
-        run: kubectl create ns hml
+        run: kubectl apply -f pipelines/deploy/kubectl/ns.yaml
                   
       - name: Helm - Deploy frontend-foo
         run: |
