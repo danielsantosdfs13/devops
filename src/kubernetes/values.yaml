@@ -17,13 +17,10 @@ resources:
 
 ingress:
   enabled: true
-  # annotations: 
-  #   nginx.ingress.kubernetes.io/enable-cors: "true"
-  #   nginx.ingress.kubernetes.io/rewrite-target: /jcot
   host: dev.amoremfigurinhasbh.com.br
   routes: 
     - paths:
-        - path: /
+        - path: /api
 
 hpa:
   enabled: true
