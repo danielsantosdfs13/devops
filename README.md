@@ -1,6 +1,23 @@
+# Premissas 
+
+Para funcionamento correto da pipeline utilizado nessa branch configurar o remote state para o terraform persistir o estado do ambiente em um bucket s3, essa configuração é feita no arquivo `src/terraform/main.tf`
+
+```json
+terraform {
+  backend "s3" {
+    bucket = "devops-tf-remote-state-aws"
+    key    = "terraform/devops_state"
+    region = "us-east-1"
+  }
+}
+```
+
+Além das variáveis obrigatórias descritas em sequência.
+
+
 # Descrição
 
-Realizar criacão dos recursos base de infraestrutura para funcionamento da stack foo.
+Realizar criação dos recursos base de infraestrutura para funcionamento da stack foo.
 
 ## Variáveis obrigatórias
 
