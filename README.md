@@ -1,3 +1,5 @@
+![CI-FRONTEND](https://github.com/danielsantosdfs13/devops/workflows/CI-FRONTEND/badge.svg?branch=frontend-foo-dev)
+
 # Premissas 
 
 Para funcionamento correto da pipeline utilizado nessa branch é necessário que tenha realizado a inplantação da infraestrutura básica descrita na [branch IAC](https://github.com/danielsantosdfs13/devops/tree/iac).
