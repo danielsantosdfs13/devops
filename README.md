@@ -1,3 +1,13 @@
+![CI-IAC](https://github.com/danielsantosdfs13/devops/workflows/CI-IAC/badge.svg?branch=iac)
+
+![CI-BACKEND](https://github.com/danielsantosdfs13/devops/workflows/CI-BACKEND/badge.svg?branch=backend-foo)
+![CI-BACKEND](https://github.com/danielsantosdfs13/devops/workflows/CI-BACKEND/badge.svg?branch=backend-foo-dev)
+
+![CI-FRONTEND](https://github.com/danielsantosdfs13/devops/workflows/CI-FRONTEND/badge.svg?branch=frontend-foo)
+![CI-FRONTEND](https://github.com/danielsantosdfs13/devops/workflows/CI-FRONTEND/badge.svg?branch=frontend-foo-dev)
+
+
+
 # Descrição
 
 Objetivo: Criar um ambiente utilizando o menor nível de ação interativa/manual possível.
