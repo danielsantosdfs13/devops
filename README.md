@@ -1,3 +1,5 @@
+![CI-BACKEND](https://github.com/danielsantosdfs13/devops/workflows/CI-IAC/badge.svg?branch=iac)
+
 # Premissas 
 
 Para funcionamento correto da pipeline utilizado nessa branch configurar o remote state para o terraform persistir o estado do ambiente em um bucket s3, essa configuração é feita no arquivo `src/terraform/main.tf`
