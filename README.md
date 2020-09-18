@@ -36,15 +36,15 @@ Etapas:
 
 ### frontend-foo
 
-| Item                  | Valor                                                 | Descrição ? |
-| :-------------------  | :-----:                                               | :--------:  |
-| Engine                |  Node.js                                              |    N/A      |
-| Porta                 |  8080                                                 |    Porta tcp configurada na aplicação      |
-| Path (PRD)            |  http://**`<URL_BASE>`**/api                          |    NÃO      |
-| Path (HML)            |  http://**`<URL_BASE>`**/api/                         |    NÃO      |
-| Helm values (PRD)     |  src/kubernetes/prd-values.yaml                       |    NÃO      |
-| Helm values (HML)     |  src/kubernetes/values.yaml                           |    NÃO      |
-| Dockerfile            |  src/dockerfile                                       |    NÃO      |
+| Item                  | Valor                                                 | Descrição ?                                                                                    |
+| :-------------------  | :-----:                                               | :--------:                                                                                     |
+| Engine                |  Node.js                                              |    N/A                                                                                         |
+| Porta                 |  8080                                                 |    Porta tcp configurada na aplicação                                                          |
+| Path (PRD)            |  http://**`<URL_BASE>`**/api                          |    Url para acesso ao frontend-foo                                                              |
+| Path (HML)            |  http://**`<URL_BASE`**/api                           |    Url para acesso ao frontend-foo                                                              |
+| Helm values (PRD)     |  src/kubernetes/prd-values.yaml                       |    Valores utilizado pela branch frontend-foo para aplicação do helm ambiente produtivo         |
+| Helm values (HML)     |  src/kubernetes/values.yaml                           |    Valores utilizado pela branch frontend-foo-dev para aplicação do helm ambiente não produtivo |
+| Dockerfile            |  src/dockerfile                                       |    Definição da imagem docker para aplicação frontend-foo                                       |
 
 ## Configurações importantes
 
